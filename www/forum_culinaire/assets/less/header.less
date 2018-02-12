@@ -1,0 +1,37 @@
+header{
+    .navbar-default .navbar-brand{
+        color: @colorTxtMain;
+    }
+     .navbar-default{
+        border-bottom: solid 4px @colorTxtMain;     
+    }
+        
+    div#menu-nav{
+        text-align: left;
+        
+        .form-group{
+         text-align: center;
+        }
+        
+        .btn{
+            padding: 15px 25px;
+        }
+    }
+
+    @media (min-width: @screen-md-min) {
+
+        .navbar-nav{
+            padding: 0 20px;
+        }
+
+        .navbar-default{
+            padding: 0 4%; 
+        }
+        div#menu-nav{
+
+            .btn{
+                padding: 5px 5px;
+            }
+        }
+    }
+}

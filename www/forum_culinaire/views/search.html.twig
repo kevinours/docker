@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}recherche{% endblock %}
+
+{% block content %}
+    <section class="search">
+        {% if topics is defined %}
+            <h1>Vous avez cherché : "{{content}}"</h1>
+        <p>Ces topics ont été trouvés : </p>
+            <nav>
+                <ul>
+                    {% for topic in topics %}
+                        <li><a href="/cat/{{topic.categorie.id}}/top/{{topic.id}}">{{topic.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% else %}
+            <h1>La recherche "{{content}}" ne retourne aucun resultat.</h1>
+        {% endif %}
+    </section>
+{% endblock %}
+

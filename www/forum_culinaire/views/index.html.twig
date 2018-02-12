@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Topics récents</h1>
+    <div class="row lastPost">
+        {% set i=0 %}
+        {% for SortDatePost in SortDatePosts |slice(0, 3) %}
+        <a href="cat/{{SortDatePost.CatId}}/top/{{SortDatePost.TopId}}">
+            <div class ="lastPost{{SortDatePost.CatId}} col-xs-10 col-xs-offset-1 col-md-3 
+                {% if (i==1 or i==2) %}
+                    {{'col-md-offset-1'}}
+                {% else %}
+                    {{'col-md-offset-0'}}
+                {% endif %}
+            ">
+                {% set i=i+1 %}
+                <h2>{{SortDatePost.title}}</h2>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <table class="table table-perso home">
+        <thead>
+            <tr class="row">
+                <th class="col-md-6"><h1>Catégories</h1></th>
+                <th class="col-md-6"><h1>Nombre de sujets</h1></th>
+            </tr>
+        </thead>
+        <tbody>    
+            {% for categorie in categories %}
+                <tr class="row">
+                    <td class="col-xs-12 col-md-10 row">
+                        <a href="cat/{{ categorie.id }}" class="col-xs-6 col-md-2"><div class="color{{ categorie.id }}"></div></a>
+                        <h2 class="col-xs-6 col-md-10 "><a href="cat/{{ categorie.id }}">{{ categorie.name }}</a></h2>
+                        <p class="col-md-10">{{ categorie.description }}</p>
+                    </td>
+                    <td class="col-md-2">
+                        <div class="cadre{{ categorie.id }}"><div>{{categorie.nbTopic}}</div></div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

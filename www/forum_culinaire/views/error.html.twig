@@ -1,0 +1,11 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Page inconnue{% endblock %}
+
+{% block content %}
+    <h1>La page que vous tentez d'afficher n'existe pas.</h1>
+
+    <div id="timer" class="display"></div>
+
+    <script src="{{ asset('/dist/js/timer.js') }}"></script>
+{% endblock %}

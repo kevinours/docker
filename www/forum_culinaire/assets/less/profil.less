@@ -1,0 +1,51 @@
+.profil{
+    text-align: center;   
+
+    ul{
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .form-control {
+        width: 100%;
+        height: auto;
+        font-size: inherit;
+        color: white;
+        background-color: #5E5E5E;
+        padding : 15px 5px;
+        margin-bottom:15px;
+    }
+    
+    .btn{
+        width: 100%;
+        color: white;
+        background-color: @colorTxtMain;
+        padding : 15px 5px;
+        margin-bottom:15px;
+    }
+    
+    @media (min-width: @screen-md-min) {  
+        text-align: left;
+        
+        label{
+            display: inline-block;
+        }
+        
+        ul li{
+            display: inline-block;
+        }
+        .form-control {
+            width: auto;
+            color: @colorTxtMain;
+            background-color: white;
+            border: none;
+            padding : 0px;
+        }
+        .btn{
+            width: auto;
+            color: white;
+            background-color: @colorTxtMain;
+            padding : 5px 11px;
+        }
+    }
+}

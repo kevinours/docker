@@ -1,0 +1,93 @@
+.cat1, .cat2, .cat3, .cat4{
+    .btn{
+        color:white;
+    }
+    
+    nav{
+        text-align: center;
+        color: white;
+        ul{
+            padding: 0;
+        }
+        
+        li{
+            list-style-type: none;
+            padding: 5px 10px;
+            margin: 15px 0;
+            background-color: @colorTxtMain;
+            
+            a{
+                color: white;
+            }
+        }
+    }
+    
+    table{
+        display: none;
+    }
+    
+    @media (min-width: @screen-md-min) {
+       nav{
+           display: none;
+       }
+        table{
+            display: table;
+            
+            thead{
+                color: white;
+            }
+            
+            h2 a {
+                color: @colorTxtMain;
+            }
+        }  
+    }
+}
+
+.cat1{
+    .btn{
+        background-color: @colorCat1;
+    }
+    @media (min-width: @screen-md-min) {    
+        thead{
+            background-color: @colorCat1;
+
+        }
+    }  
+}
+
+.cat2{
+    .btn{
+        background-color: @colorCat2;
+    }
+    @media (min-width: @screen-md-min) {    
+        thead{
+            background-color: @colorCat2;
+
+        }
+    }  
+}
+
+.cat3{
+    .btn{
+        background-color: @colorCat3;
+    }
+    @media (min-width: @screen-md-min) {    
+        thead{
+            background-color: @colorCat3;
+
+        }
+    }  
+}
+
+.cat4{
+    .btn{
+        background-color: @colorCat4;
+    }
+    @media (min-width: @screen-md-min) {    
+        thead{
+            background-color: @colorCat4;
+
+        }
+    }  
+}

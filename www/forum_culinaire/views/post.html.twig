@@ -1,0 +1,102 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{topic.title}}{% endblock %}
+
+{% block content %}
+    <section class="topCat{{categorie.id}} row">
+        <h1 class="col-xs-10 col-xs-offset-1 col-md-offset-0 col-md-12">{{topic.title}}</h1>
+        
+<!--        Version mobile-->
+        <article class="row">
+            <img class="avatar col-xs-3 col-xs-offset-1" src="/img/avatar/{{topic.author_picture | default('default.png')}}" alt="avatar">
+            <p class="col-xs-7">{{topic.author_name | default('utilisateur supprimé')}}</p>
+            <p class="col-xs-7">{{ topic.date | date("d/m/Y à H:i") }}</p>
+            <p class="col-xs-10 col-xs-offset-1">{{ topic.content }}</p> 
+            {% if app.user and is_granted('ROLE_ADMIN') %}
+                 <p class="col-xs-10 col-xs-offset-1 sup">
+                     <a href="/cat/{{categorie.id}}/top/{{topic.id}}/delete">supprimer</a>
+                </p>
+            {% endif %}
+        </article>
+
+        {% for post in posts %}
+            <article class="row">
+                <img class="avatar col-xs-3 col-xs-offset-1" src="/img/avatar/{{post.author.picture | default('default.png')}}" alt="avatar">
+                <p class="col-xs-7"> {{post.author.username | default('utilisateur supprimé')}}</p>
+                 <p  class=" col-xs-7">{{ post.date | date("d/m/Y à H:i") }}</p>
+                <p class=" col-xs-10 col-xs-offset-1">{{ post.content }}</p> 
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                     <p class=" col-xs-10 col-xs-offset-1 sup">
+                         <a href="/cat/{{categorie.id}}/top/{{topic.id}}/post/{{post.id}}/delete">supprimer</a>
+                    </p>
+                {% endif %}
+            </article>
+        {% endfor %}
+        
+<!--        Version ordinateur et tablette -->   
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td class="user">
+                         <img class="avatar" src="/img/avatar/{{topic.author_picture | default('default.png')}}" alt="avatar"><br>
+                        {{topic.author_name | default('utilisateur supprimé')}}
+                    </td>
+                    <td>
+                        <p>Le {{ topic.date | date("d/m/Y à H:i") }}</p>
+                        <p>{{ topic.content }}</p> 
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                            <p class="sup">
+                                <a href="/cat/{{categorie.id}}/top/{{topic.id}}/delete">supprimer</a>  
+                            </p>      
+                        {% endif %}
+                    </td>
+                </tr>
+
+                {% for post in posts %}
+                    <tr>
+                        <td  class="user">
+                            <img class="avatar" src="/img/avatar/{{post.author.picture | default('default.png')}}" alt="avatar"><br>   
+                            {{post.author.username | default('utilisateur supprimé')}}
+                        </td>
+                        <td>
+                            <p>Le {{ post.date | date("d/m/Y à H:i") }}</p>
+                            <p>{{ post.content }}</p>
+                            {% if app.user and is_granted('ROLE_ADMIN') %}
+                                <p class="sup">
+                                    <a href="/cat/{{categorie.id}}/top/{{topic.id}}/post/{{post.id}}/delete">supprimer</a>
+                                </p>
+                               
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </section>
+    <section class="topCat{{categorie.id}} ">
+        <h2>Répondre</h2>
+        {% if postForm %}
+            {{ form_start(postForm) }}
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    {{ form_errors(postForm.content) }}
+                    {{ form_widget(postForm.content, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez votre réponse'
+                    }}) }}
+                </div>
+                <input class="col-xs-10 col-xs-offset-1 col-md-3 col-md-offset-0 btn" type="submit" value="Publiez votre réponse" />
+            </div>
+            {{ form_end(postForm) }}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <a class="comConnexion" href="{{ path('connexion') }} ">Connectez vous</a> pour pouvoir poster une réponse.
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{categorie.name}}{% endblock %}
+
+{% block content %}
+    <section class="cat{{categorie.id}} ">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <p class="row">
+                <a class="btn col-xs-10 col-xs-offset-1 col-md-offset-0 col-md-2" href="{{categorie.id}}/add">Nouveau sujet</a>
+            </p>
+        {% endif %}
+        <nav>
+            <ul>
+                {% for topic in topics %}
+                    <li>
+                        <h2><a href="{{categorie.id}}/top/{{ topic.id }}">{{ topic.title }}</a></h2>
+                        {% for post in posts %}
+                            {% if post.id == topic.id %}
+                                <p>{{post.author_name}}</p> 
+                                <p>le {{post.lastDatePost | date("d/m/Y à H:i")}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>  
+    
+        <table class="table table-perso">
+            <thead>
+                <tr>
+                    <th>Sujets</th>
+                    <th>Dernier message posté par</th>
+                    <th>Nombre de réponses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td>
+                            <h2><a href="{{categorie.id}}/top/{{ topic.id }}">{{ topic.title }}</a></h2>
+                        </td>
+                        <td>
+                            {% for post in posts %}
+                                {% if post.id == topic.id %}
+                                    {{post.author_name}} le {{post.lastDatePost | date("d/m/Y à H:i")}}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div class="cadre{{ categorie.id }}">
+                                <div>
+                                    {% for post in posts %}
+                                        {% if post.id == topic.id %}
+                                            {{post.nbPost}}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{user.username}}{% endblock %}
+
+{% block content %}
+    <section class="profil">
+        <h2 class=""> Profil de {{ block('title') }}</h2>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+            </div>
+        {% endfor %}
+
+        <img class="avatar" src="/img/avatar/{{user.picture | default('default.png')}}"/>
+
+        <div>
+            {{ form_start(imageForm, { 'attr': {'class': 'form-horizontal'} }) }}
+                <div class="form-group">
+                                
+                    {{ form_label(imageForm.file, null, { 'label_attr':  {
+                    'class': 'col-sm-4 control-label'
+                    }}) }}
+                    <ul>
+                        <li><u>Fomats :</u> jpg, png, gif</li>
+                        <li><u>Taille max. :</u> 500 ko</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        {{ form_errors(imageForm.file) }}
+                        {{ form_widget(imageForm.file, { 'attr':  {
+                        'class': 'form-control'
+                        }}) }}
+                    </div>
+
+                    <div class="col-sm-offset-4 col-sm-3">
+                        <input type="submit" class="btn" value="Modfier" />
+                    </div>
+                </div>
+            {{ form_end(imageForm) }}  
+        </div>
+        {#
+            <form method="post" action="/upload" enctype="multipart/form-data">
+                <!--<input type="hidden" name="MAX_FILE_SIZE" value="500">-->
+                <input type="file" name="file" />
+                <input type="submit" value="Submit"/>  
+            </form>
+         #}
+    </section>
+{% endblock %}

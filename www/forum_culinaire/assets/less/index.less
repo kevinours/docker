@@ -1,0 +1,114 @@
+main{
+    .lastPost1, .lastPost2, .lastPost3, .lastPost4 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        
+        a{
+            font-weight: bold;
+        }
+    }
+    
+    .lastPost1 {
+        background: @colorCat1;
+    } 
+
+    .lastPost2 {
+        background: @colorCat2;
+    } 
+
+    .lastPost3 {
+        background: @colorCat3;
+    } 
+
+    .lastPost4 {
+        background: @colorCat4;
+    }
+    
+    .color1, .color2, .color3, .color4 {
+        width: 75px;
+        height: 75px;
+        
+    }
+
+    .color1 {
+        background: @colorCat1;
+    } 
+
+    .color2 {
+        background: @colorCat2;
+    } 
+
+    .color3 {
+        background: @colorCat3;
+    } 
+
+    .color4 {
+        background: @colorCat4;
+    } 
+    
+    .cadre1, .cadre2, .cadre3, .cadre4 {
+        width: 100px;
+        height: 100px;
+        display: flex; 
+    }
+    .cadre1 div, .cadre2 div, .cadre3 div, .cadre4 div {
+        margin: auto;
+    }
+    
+    .cadre1 {
+            border: 6px @colorCat1 solid;
+    }
+
+    .cadre2 {
+            border: 6px @colorCat2 solid;
+    }
+
+    .cadre3 {
+            border: 6px @colorCat3 solid;
+    }
+
+    .cadre4 {
+            border: 6px @colorCat4 solid;
+    }
+
+    table.home {
+        
+        thead th:nth-of-type(2), tbody td:nth-of-type(1) p, tbody td:nth-of-type(2){
+            display: none;
+        }
+        tbody{
+            h2{
+                margin: 25px 0 0 0;
+                padding: 0;   
+            }
+            
+            a{            
+                color: @colorTxtMain;
+            }
+            a.col-xs-6, a.col-md-2, p.col-md-10{
+                padding-left: 0;                
+            }
+            
+        }
+    }
+    @media (min-width: @screen-md-min) {
+        .color1, .color2, .color3, .color4 {
+            width: 100px;
+            height: 100px;
+        }
+        
+        table.home {
+            thead th:nth-of-type(2), tbody td:nth-of-type(1) p, tbody td:nth-of-type(2){
+                display: inherit;
+            }
+            
+            tbody{
+                h2{
+                    margin: 15px 0 0 0;  
+                }
+            }
+        }
+    }
+}

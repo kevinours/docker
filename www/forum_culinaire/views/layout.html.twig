@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ asset('dist/css/main.css') }}" rel="stylesheet">
+
+    <!--   <link href="/lib/bootstrap/css/bootstrap.css?v1" rel="stylesheet">-->
+        <title>{% block title %}{% endblock %} - forum culinaire</title>
+    </head>
+    <body>
+       <header>
+           <nav class="navbar navbar-default" role="navigation"> 
+            <div class="container-fluid"> 
+                <div class="navbar-header"> 
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-nav"> 
+                        <span class="sr-only">Basculer Menu</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                    </button> 
+                    <a class="navbar-brand" href="{{ path('Accueil') }}">Forum culinaire</a>
+                </div> 
+                <div class="collapse navbar-collapse" id="menu-nav"> 
+                    <ul class="nav navbar-nav navbar-right"> 
+                        <li>
+                            <form method ="POST" action ="/search" name="search" class="navbar-form navbar-right inline-form">
+                                <div class="form-group">
+                                    <input type="search" required name="searchByTopic" class="input-sm form-control" placeholder="Rechercher">
+                                    <button type="submit" class="btn btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </form>
+                        </li>
+                         <li>
+                            <a href="{{ path('Accueil') }}"><span class="glyphicon glyphicon-home"></span> Accueil</a>
+                        </li> 
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li>
+                                <a href="{{ path('profil') }}"><span class="glyphicon glyphicon-user"></span> Profil</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('pre_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('inscription') }}"><span class="glyphicon glyphicon-list-alt"></span> S'inscrire</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('connexion') }}"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a>
+                            </li>
+                        {% endif %}
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
+                        {% endif %}
+                    </ul> 
+                </div> 
+            </div> 
+        </nav>
+    </header>
+        <div class="container">
+            <main id="content">{% block content %}{% endblock %}</main>
+        </div>
+            <footer class="footer">
+                <div class="footer_content">
+                    <section>
+                        <h3>Qui est en ligne ?</h3>
+                        <ul>
+                            {% for userOnline in usersOnline %}
+                                <li>{{userOnline.usr_name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                    <section>
+                        {% set current_path = global.request.get('_route') %}
+                        {% if categorie.name is defined %}
+                                <a href="/}">Accueil</a>
+                                > <a href="/cat/{{ categorie.id }}">{{categorie.name}}</a>
+                            {% else %}
+                                <a href="{{ global.request.pathinfo }}">{{ current_path }}</a>
+                        {% endif %}
+                        {% if topic.title is defined %}
+                            > <a href="{{ topic.id }}">{{topic.title}} </a>
+                        {% endif %}
+                    </section>
+                </div>
+            </footer>
+
+        <!-- jQuery -->
+        <script src="{{ asset('/dist/js/jquery.min.js') }}"></script>
+        <!-- JavaScript Boostrap plugin -->
+        <script src="{{ asset('/dist/js/bootstrap.min.js') }}"></script>
+    </body>
+</html>
