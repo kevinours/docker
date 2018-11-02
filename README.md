@@ -1,6 +1,6 @@
 # Dockerisation d'un forum php
 
-Projet LP de __Morphée LEGUAY__ & __kevin AUBRY__
+Projet LP de __kevin AUBRY__
 Configuration du projet hors IUT, sans proxy. Testé sur Ubuntu 16.04 xenial
 
 * docker-compose up
